@@ -1,5 +1,6 @@
 # convnet
-[Convolutional Neural Net to classify dog vs. cat pics] (https://www.kaggle.com/stevenhurwitt/cats-vs-dogs-using-a-keras-convnet)
+Convolutional Neural Net to classify dog vs. cat pics
+https://www.kaggle.com/stevenhurwitt/cats-vs-dogs-using-a-keras-convnet
 
 Basic Convolutional Neural Network (Convnet) implemented in Keras to classify pictures of kitties & puppies :) 
 
