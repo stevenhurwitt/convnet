@@ -9,7 +9,7 @@ Inspiration for this notebook comes from this [Keras blog post](https://blog.ker
 and the [VGG ConvNet paper](https://arxiv.org/pdf/1409.1556.pdf), 
 code modified from [Jeff Delaney](https://www.kaggle.com/jeffd23). 
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Files include:
 
 **api_convnet.py** - Simple API that takes GET requests of test image number (1-12500) and returns predicted probability. Once the program is run and served on port 5000, command line input looks like this:
