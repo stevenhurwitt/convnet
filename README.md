@@ -1,4 +1,4 @@
-# convnet
+## convnet
 Convolutional Neural Net to classify dog vs. cat pics
 
 https://www.kaggle.com/stevenhurwitt/cats-vs-dogs-using-a-keras-convnet
@@ -10,7 +10,7 @@ and the [VGG ConvNet paper](https://arxiv.org/pdf/1409.1556.pdf),
 code modified from [Jeff Delaney](https://www.kaggle.com/jeffd23). 
 
 
-Files include:
+## Files include:
 
 **api_convnet.py** - Simple API that takes GET requests of test image number (1-12500) and returns predicted probability. Once the program is run and served on port 5000, command line input looks like this:
 
@@ -26,4 +26,4 @@ $ curl -X GET http://127.0.0.1:5000/ -d image='1.jpg'
 
 **predcatdog.py** - Makes predictions on the test data.
 
-**convnet.py** - Runs the entire program at once, data processing, model training & predictions.
+**convnet.py** - Runs the entire program at once: data processing, model training & predictions.
