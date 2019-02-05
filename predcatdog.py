@@ -79,7 +79,7 @@ loaded_model = model_from_json(loaded_model_json)
 loaded_model.load_weights("catdog.h5")
 print("Loaded model from disk")
 
-model.save('catdog.hdf5')
+#model.save('catdog.hdf5')
 loaded_model=load_model('catdog.hdf5')
 
 #pred2 = loaded_model.predict(test)
