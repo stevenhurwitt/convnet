@@ -1,0 +1,70 @@
+import os, cv2, random, h5py
+import numpy as np
+import pandas as pd
+import pickle
+
+import matplotlib.pyplot as plt
+from matplotlib import ticker
+import seaborn as sns
+
+from flask import Flask
+from flask_restful import reqparse, abort, Api, Resource
+
+from keras import backend as K
+from keras.models import Sequential, load_model
+from keras.layers import Input, Dropout, Flatten, Conv2D, MaxPooling2D, Dense, Activation
+from keras.optimizers import RMSprop
+from keras.callbacks import ModelCheckpoint, Callback, EarlyStopping
+from keras.utils import np_utils
+
+app = Flask(__name__)
+api = Api(app)
+
+os.chdir('/Volumes/Untitled/convnet/')
+test_dir = os.getcwd() + '/test/'
+
+#take image as {image : file_path.jpg}
+
+parser = reqparse.RequestParser()
+parser.add_argument('image')
+
+class PredictImage(Resource):
+    def get(self):
+        args = parser.parse_args()
+        image_file = test_dir + args['image']
+
+        def read_image(file_path):
+            img = cv2.imread(file_path, cv2.IMREAD_COLOR) #cv2.IMREAD_GRAYSCALE
+            b,g,r = cv2.split(img)
+            img2 = cv2.merge([r,g,b])
+            return cv2.resize(img2, (ROWS, COLS), interpolation=cv2.INTER_CUBIC)
+
+        ROWS = 256
+        COLS = 256
+        CHANNELS = 3
+
+        image = read_image(image_file)
+        image2 = np.ndarray((1, CHANNELS, ROWS, COLS), dtype = np.uint8)
+        image2[0] = image.T
+
+        print("loading model...")
+        loaded_model=load_model('catdog.hdf5')
+    
+        loaded_model.load_weights("catdog.h5")
+        print("loaded model from disk")
+
+        prediction = loaded_model.predict(image2, verbose = 0)
+        prediction = np.take(prediction, 0)
+
+        if prediction >= 0.5:
+            output = 'I am {:.2%} sure this is a Dog'.format(prediction)
+        else:
+            output = 'I am {:.2%} sure this is a Cat'.format(1-prediction)
+        
+
+        return {'prediction' : output}
+
+api.add_resource(PredictImage, '/')
+
+if __name__ == '__main__':
+    app.run(debug = True)
